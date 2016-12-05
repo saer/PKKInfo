@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="PKKInfo.PropertyVisualizer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PKKInfo"
+             mc:Ignorable="d" 
+             x:Name="__this"
+             d:DesignHeight="100" d:DesignWidth="300">
+    <Grid Margin="3">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Name="tbPropName" 
+                   Grid.Column="0" 
+                   VerticalAlignment="Top" 
+                   HorizontalAlignment="Right"
+                   TextWrapping="Wrap"
+                   FontWeight="Bold"
+                   Text="{Binding ElementName=__this, Path=VisualizerName}">
+        </TextBlock>
+
+        <TextBlock Name="tbPropValue" 
+                   Grid.Column="2" 
+                   VerticalAlignment="Top" 
+                   HorizontalAlignment="Left"
+                   TextWrapping="Wrap"
+                   Text="{Binding ElementName=__this, Path=VisualizerFormattedValue}">
+        </TextBlock>
+
+    </Grid>
+</UserControl>

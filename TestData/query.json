@@ -1,0 +1,55 @@
+{
+  "feature": {
+    "attrs": {
+      "adate": "05.04.2016", 
+      "address": null, 
+      "anno_text": "485", 
+      "area_type": "009", 
+      "area_unit": "055", 
+      "area_value": 315963.0, 
+      "cad_cost": 343164254.67, 
+      "cad_eng_data": {
+        "actual_date": "Wed, 13 Jul 2016 00:00:00 GMT", 
+        "co_name": "\u041e\u041e\u041e \"\u041f\u0435\u0442\u0440\u043e\u043f\u0430\u0432\u043b\u043e\u0432\u0441\u043a\u0430\u044f \u043a\u0430\u0434\u0430\u0441\u0442\u0440\u043e\u0432\u0430\u044f \u0441\u043b\u0443\u0436\u0431\u0430\"", 
+        "lastmodified": "Wed, 13 Jul 2016 12:05:29 GMT", 
+        "rc_type": 1
+      }, 
+      "cad_record_date": "07.08.2014", 
+      "cad_unit": "383", 
+      "category_type": "003002000000", 
+      "cn": "41:01:0010114:485", 
+      "date_cost": "01.01.2012", 
+      "date_create": "10.03.2010", 
+      "fp": "200", 
+      "id": "41:1:10114:485", 
+      "kvartal": "41:1:10114", 
+      "kvartal_cn": "41:01:0010114", 
+      "okrug": "41", 
+      "okrug_cn": "41", 
+      "pubdate": "16.07.2016", 
+      "rayon": "41:1", 
+      "rayon_cn": "41:01", 
+      "reg": 141, 
+      "rifr": null, 
+      "rights_reg": 1, 
+      "sale": null, 
+      "statecd": "06", 
+      "util_by_doc": "\u0434\u043b\u044f \u044d\u043a\u0441\u043f\u043b\u0443\u0430\u0442\u0430\u0446\u0438\u0438 \u043e\u0431\u044a\u0435\u043a\u0442\u043e\u0432 \u0432/\u0447 71388, \u0432/\u0447 39209", 
+      "util_code": "147000000000"
+    }, 
+    "center": {
+      "x": 17659139.63941186, 
+      "y": 6996326.380768019
+    }, 
+    "extent": {
+      "xmax": 17659647.68723967, 
+      "xmin": 17658643.828244977, 
+      "ymax": 6996909.71539004, 
+      "ymin": 6995631.412558418
+    }, 
+    "stat": null, 
+    "type": 1
+  }, 
+  "note": "", 
+  "status": 200
+}
