@@ -22,47 +22,37 @@ namespace PKKInfo
     /// </summary>
     public partial class MainWindow : Window
     {
+        private RestClient restClient;
+
         public MainWindow()
         {
             InitializeComponent();
-
-            var client = new RestClient("http://pkk5.rosreestr.ru/api");
-
-            var request = new RestRequest("features/{type}/{id}");
-            request.JsonSerializer = new CustomJsonSerializer();
-            request.AddUrlSegment("type", "1");
-            request.AddUrlSegment("id", "41:1:10114:630");
-
-            client.ExecuteAsync<PKKObjectParcel>(request, response =>
-            {
-                Dispatcher.Invoke((Action)delegate ()
-                {
-                    OnNewDataReceived(response.Data);
-                });
-           });
-
+            restClient = new RestClient("http://pkk5.rosreestr.ru/api");
         }
 
         public void OnNewDataReceived(PKKObjectParcel data)
         {
             AddVisualizer("Кадастровый номер", data.feature.attrs.cn);
             AddVisualizer("Адрес", data.feature.attrs.address);
-            AddVisualizer("Кадастровая стоимость", data.feature.attrs.cad_cost, "{0:0,0.00 руб\\.}");
+            AddVisualizer("Кадастровая стоимость", data.feature.attrs.cad_cost, "{0:0.00, руб\\.}");
 
             var cadEng = data.feature.attrs.cad_eng_data;
-            string cadEngStr = string.Empty;
-
-            if (cadEng.co_name != null)
+            if (cadEng != null)
             {
-                cadEngStr = cadEng.co_name;
-            }
-            else if (cadEng.ci_first != null)
-            {
-                cadEngStr = String.Format("{0} {1} {2}, аттестат № {3}", cadEng.ci_surname, cadEng.ci_first, cadEng.ci_patronymic, cadEng.ci_n_certificate);
-            }
+                string cadEngStr = string.Empty;
 
-            if (!String.IsNullOrEmpty(cadEngStr))
-                AddVisualizer("Кадастровый инженер", cadEngStr);
+                if (cadEng.co_name != null)
+                {
+                    cadEngStr = cadEng.co_name;
+                }
+                else if (cadEng.ci_first != null)
+                {
+                    cadEngStr = String.Format("{0} {1} {2}, аттестат № {3}", cadEng.ci_surname, cadEng.ci_first, cadEng.ci_patronymic, cadEng.ci_n_certificate);
+                }
+
+                if (!String.IsNullOrEmpty(cadEngStr))
+                    AddVisualizer("Кадастровый инженер", cadEngStr);
+            }
         }
 
         public void AddVisualizer(string name, object value, string format = null)
@@ -86,6 +76,27 @@ namespace PKKInfo
                 vis.VisualizerFormat = format;
 
             CentralStack.Children.Add(vis);
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string cn = Helpers.HardClearCadastralNumber(MainTextBox.Text);
+            MainTextBox.Text = cn;
+
+            var request = new RestRequest("features/{type}/{id}");
+            request.JsonSerializer = new CustomJsonSerializer();
+            request.AddUrlSegment("type", "1");
+            request.AddUrlSegment("id", Helpers.CompressCadastralNumber(cn));
+
+            CentralStack.Children.Clear();
+
+            restClient.ExecuteAsync<PKKObjectParcel>(request, response =>
+            {
+                Dispatcher.Invoke((Action)delegate ()
+                {
+                    OnNewDataReceived(response.Data);
+                });
+            });
         }
     }
 }

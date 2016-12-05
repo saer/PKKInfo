@@ -5,9 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PKKInfo"
         mc:Ignorable="d"
+        SnapsToDevicePixels="True"
         Title="Запрос сведений ПКК" Height="350" Width="600">
-    <StackPanel Name="CentralStack" Orientation="Vertical" Margin="30">
-       
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-    </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
+            <TextBox Name="MainTextBox" Width="200"></TextBox>
+            <Button Name="SearchButton" Click="SearchButton_Click">Поиск</Button>
+        </StackPanel>
+
+        <StackPanel Name="CentralStack" Orientation="Vertical" Grid.Row="1">
+        </StackPanel>
+    </Grid>
 </Window>

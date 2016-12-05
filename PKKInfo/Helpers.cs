@@ -54,7 +54,7 @@ namespace PKKInfo
             return String.Empty;
         }
 
-        public string HardClearCadastralNumber(string cn)
+        public static string HardClearCadastralNumber(string cn)
         {
             string result = String.Empty;
 
