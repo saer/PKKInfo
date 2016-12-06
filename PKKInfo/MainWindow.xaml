@@ -13,12 +13,14 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        
         <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
             <TextBox Name="MainTextBox" Width="200"></TextBox>
             <Button Name="SearchButton" Click="SearchButton_Click">Поиск</Button>
         </StackPanel>
-
-        <StackPanel Name="CentralStack" Orientation="Vertical" Grid.Row="1">
-        </StackPanel>
+        
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Name="CentralStack" Orientation="Vertical"></StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

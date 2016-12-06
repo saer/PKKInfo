@@ -32,41 +32,40 @@ namespace PKKInfo
 
         public void OnNewDataReceived(PKKObjectParcel data)
         {
-            AddVisualizer("Кадастровый номер", data.feature.attrs.cn);
-            AddVisualizer("Адрес", data.feature.attrs.address);
-            AddVisualizer("Кадастровая стоимость", data.feature.attrs.cad_cost, "{0:0.00, руб\\.}");
-
-            var cadEng = data.feature.attrs.cad_eng_data;
-            if (cadEng != null)
+            if (data == null)
             {
-                string cadEngStr = string.Empty;
-
-                if (cadEng.co_name != null)
-                {
-                    cadEngStr = cadEng.co_name;
-                }
-                else if (cadEng.ci_first != null)
-                {
-                    cadEngStr = String.Format("{0} {1} {2}, аттестат № {3}", cadEng.ci_surname, cadEng.ci_first, cadEng.ci_patronymic, cadEng.ci_n_certificate);
-                }
-
-                if (!String.IsNullOrEmpty(cadEngStr))
-                    AddVisualizer("Кадастровый инженер", cadEngStr);
+                AddVisualizer("Ошибка", "Сервис не вернул данных");
+                return;
             }
+
+            if (!String.IsNullOrEmpty(data.note))
+            {
+                AddVisualizer("Ошибка", $"Сервис вернул ошибку. Код: {data.status}. Сообщение:{data.note}");
+                return;
+            }
+
+
+            if (data.feature == null)
+            {
+                AddVisualizer("Ошибка", "Объект не найден");
+                return;
+            }
+
+
+            ParcelData p = new ParcelData(data);
+            AddVisualizer("Кадастровый номер", p.CadastralNumber);
+            AddVisualizer("Статус", p.Status);
+            AddVisualizer("Адрес", p.Address);
+            AddVisualizer("Площадь", p.Area, "{0} " + p.AreaUnit);
+            AddVisualizer("Кадастровая стоимость", p.CadastralCost, "{0} "+ p.CadastralCostUnit);
+            AddVisualizer("Разрешенное использование (справочник)", p.UtilityByDict);
+            AddVisualizer("Разрешенное использование (документ)", p.UtilityByDoc);
+            AddVisualizer("Кадастровый инженер", p.CadastralEngineer);
+            AddVisualizer("Дата постановки на учет", p.CadastralRegDate);
         }
 
         public void AddVisualizer(string name, object value, string format = null)
         {
-            if (CentralStack.Children.Count > 0)
-            {
-                Border brd = new Border();
-                brd.Width = 100;
-                brd.BorderThickness = new Thickness(1, 1, 1, 1);
-                brd.HorizontalAlignment = HorizontalAlignment.Center;
-                brd.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
-                CentralStack.Children.Add(brd);
-            }
-
             PropertyVisualizer vis = new PropertyVisualizer();
             vis.VisualizerName = name;
             vis.VisualizerValue = value;

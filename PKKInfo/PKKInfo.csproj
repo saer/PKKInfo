@@ -63,9 +63,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ParcelData.cs" />
     <Compile Include="PropertyVisualizer.xaml.cs">
       <DependentUpon>PropertyVisualizer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RosreestrDictionaries.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

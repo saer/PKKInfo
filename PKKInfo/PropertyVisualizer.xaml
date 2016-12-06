@@ -7,27 +7,26 @@
              mc:Ignorable="d" 
              x:Name="__this"
              d:DesignHeight="100" d:DesignWidth="300">
-    <Grid Margin="3">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30*"/>
-            <ColumnDefinition Width="15"/>
-            <ColumnDefinition Width="70*"/>
-        </Grid.ColumnDefinitions>
+
+    <Grid Margin="0 0 0 3">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
         <TextBlock Name="tbPropName" 
-                   Grid.Column="0" 
-                   VerticalAlignment="Top" 
-                   HorizontalAlignment="Right"
+                   Grid.Row="0" 
                    TextWrapping="Wrap"
                    FontWeight="Bold"
+                   Padding="2"
                    Text="{Binding ElementName=__this, Path=VisualizerName}">
         </TextBlock>
 
-        <TextBlock Name="tbPropValue" 
-                   Grid.Column="2" 
-                   VerticalAlignment="Top" 
-                   HorizontalAlignment="Left"
+        <TextBlock Name="tbPropValue"
+                   Grid.Row="2" 
                    TextWrapping="Wrap"
+                   Padding="2"
                    Text="{Binding ElementName=__this, Path=VisualizerFormattedValue}">
         </TextBlock>
 
